@@ -28,6 +28,6 @@ Las rutas son relativas (`styles.css`, `assets/`), así que funciona tanto en `u
 4. Fotos finales en alta resolución de las 6 capacidades.
 5. El formulario sigue la maqueta y no pide nombre, correo ni teléfono; hoy envía por `mailto:` (sin backend).
 6. Tire Center: confirmar que es caso real y autorizado.
-7. Cronología (Nuestra historia): faltan las fotos de época de 1992 y 2026 (hoy muestran "FOTO PENDIENTE"). Formato recomendado: vertical 4:5, mínimo 800 × 1000 px, WebP.
+7. Cronología (Nuestra historia): falta la foto de 2026 (hoy muestra "FOTO PENDIENTE"). Formato recomendado: vertical 4:5, mínimo 800 × 1000 px, WebP.
 8. Enlaces sin destino: "Conocer nuestra historia" y "Ver proyecto".
 9. Favicon e imagen para compartir en redes (`og:image`), que requiere el dominio final.
