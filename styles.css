@@ -155,6 +155,8 @@ header.open .menu span:nth-child(3) { transform: translateY(-7px) rotate(-45deg)
 .dark p { font-size: 15px; line-height: 1.6; color: var(--muted-dark) }
 
 .hist { position: relative; overflow: hidden }
+.hist .bg { object-position: 50% 40% }
+.hist .shade { background: linear-gradient(90deg, rgba(7, 16, 23, .9) 0%, rgba(7, 16, 23, .55) 55%, rgba(7, 16, 23, .35) 100%), linear-gradient(0deg, rgba(7, 16, 23, .75), transparent 45%) }
 .hist .wrap { position: relative }
 .grid { display: grid; grid-template-columns: 1fr; gap: clamp(40px, 5vw, 64px) }
 .grid > div:first-child { max-width: 760px }
@@ -178,6 +180,7 @@ header.open .menu span:nth-child(3) { transform: translateY(-7px) rotate(-45deg)
 }
 .tl-img img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: grayscale(1) contrast(1.05); transition: transform .6s ease }
 .timeline > li:hover .tl-img img { transform: scale(1.04) }
+.tl-img.color img { filter: none }
 .tl-img.ph {
   position: relative; box-shadow: none; border-style: dashed;
   background: repeating-linear-gradient(45deg, #0d1a22 0 12px, #12212b 12px 24px);
