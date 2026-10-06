@@ -1,0 +1,9 @@
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Herramientas locales
+.claude/
+node_modules/
+*.log
