@@ -709,3 +709,19 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
 @media (prefers-reduced-motion: reduce) {
   .pilar-img img, .features article::after, .pilar-body::before, .features .pilar-body b, .features .pilar-body p, .pilar-desc { transition: none }
 }
+
+/* Botón flotante de WhatsApp: fijo abajo a la derecha, visible en toda la página */
+.wa-float {
+  position: fixed; z-index: 40; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom));
+  width: 60px; height: 60px; display: grid; place-items: center; border-radius: 50%;
+  background: #25d366; color: #fff; box-shadow: 0 8px 24px rgba(7, 16, 23, .22), 0 2px 6px rgba(7, 16, 23, .12);
+  transition: transform .25s cubic-bezier(.22, .61, .36, 1), box-shadow .25s ease, background .25s ease;
+}
+.wa-float svg { width: 32px; height: 32px; fill: currentColor }
+.wa-float:hover { transform: translateY(-2px); background: #20bd5a; box-shadow: 0 12px 28px rgba(7, 16, 23, .26), 0 3px 8px rgba(7, 16, 23, .14) }
+.wa-float:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 6px #128c4a }
+@media (max-width: 560px) {
+  .wa-float { width: 54px; height: 54px; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)) }
+  .wa-float svg { width: 29px; height: 29px }
+}
+@media (prefers-reduced-motion: reduce) { .wa-float { transition: none } }
