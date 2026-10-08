@@ -534,3 +534,98 @@ small, .brand em, .flogo em, .contact .note, .cp {
   .contact form { padding: 20px 16px }
   .project { padding: 24px }
 }
+
+/* ==========================================================================
+   Hero y cintillo de 70 años (oct 2026). Solo afecta a estas dos piezas.
+   ========================================================================== */
+.hero .heroin, .cint { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif }
+
+/* ---------- Hero ---------- */
+.heroin > div { max-width: 720px; position: relative; isolation: isolate }
+/* Refuerzo leve del oscurecido solo detrás del bloque de texto */
+.heroin > div::before {
+  content: ""; position: absolute; z-index: -1; inset: -80px -120px -80px -40vw; pointer-events: none;
+  background: radial-gradient(farthest-side at 40% 62%, rgba(7, 16, 23, .68), rgba(7, 16, 23, .3) 55%, rgba(7, 16, 23, 0));
+}
+.hero .eyebrow { margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--red-on-dark) }
+.hero h1 { font-size: clamp(27px, 2.95vw, 42.5px); line-height: 1.16; font-weight: 800; letter-spacing: -.015em; max-width: 720px }
+.hero .lead { margin-top: 22px; max-width: 720px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.55; color: #e4e8ea; text-wrap: balance }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 4px 0; margin-top: 26px; font-size: 13px; font-weight: 500; letter-spacing: .02em; color: rgba(255, 255, 255, .62) }
+.hero-tags span + span::before { content: "·"; margin: 0 10px; color: rgba(255, 255, 255, .4) }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; margin-top: 36px }
+.hero .btn-ghost { background: transparent; border: 1px solid rgba(255, 255, 255, .32); font-weight: 600; letter-spacing: .02em; color: rgba(255, 255, 255, .9) }
+
+/* Botones del hero: "Icon Slide" — el relleno blanco nace a la derecha, el texto cambia de color y entra una flecha */
+.btn-slide { position: relative; overflow: hidden; isolation: isolate; white-space: nowrap; border-radius: 10px; padding-left: 35px; padding-right: 35px; transition: color .4s cubic-bezier(.44, 0, .56, 1), padding .4s cubic-bezier(.44, 0, .56, 1), border-color .4s }
+.btn-slide::after {
+  content: ""; position: absolute; z-index: -1; right: 18px; top: 50%; width: 8px; height: 8px; margin-top: -4px;
+  border-radius: 50%; background: #fff; transform: scale(0); transition: transform .5s cubic-bezier(.44, 0, .56, 1);
+}
+.btn-slide .i-arrow { max-width: 0; margin: 0; opacity: 0; transform: translateX(-10px); transition: max-width .4s cubic-bezier(.44, 0, .56, 1), margin .4s cubic-bezier(.44, 0, .56, 1), opacity .3s ease, transform .4s cubic-bezier(.44, 0, .56, 1) }
+.btn-slide:hover, .btn-slide:focus-visible { color: var(--ink); padding-left: 22px; padding-right: 22px }
+.btn.btn-slide:hover { background: var(--red-btn) }
+.btn-ghost.btn-slide:hover { background: transparent; border-color: #fff }
+.btn-slide:hover::after, .btn-slide:focus-visible::after { transform: scale(90) }
+.btn-slide:hover .i-arrow, .btn-slide:focus-visible .i-arrow { max-width: 1.3em; margin-left: 8px; opacity: 1; transform: none }
+@media (prefers-reduced-motion: reduce) {
+  .btn-slide, .btn-slide::after, .btn-slide .i-arrow { transition: none }
+}
+@media (max-width: 560px) {
+  .hero h1 { font-size: 27px }
+  .hero .eyebrow { font-size: 11px; letter-spacing: .12em }
+  .hero-tags { flex-direction: column; gap: 4px }
+  .hero-tags span + span::before { display: none }
+  .hero .actions { flex-direction: column; align-items: stretch; gap: 12px }
+  .hero .actions .btn { width: 100% }
+}
+
+/* ---------- Cintillo: 70 años de trayectoria | Tradición de Calidad CAPELLA ---------- */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+.cint { background: #fff; padding: clamp(28px, 3.2vw, 44px) 0; border-bottom: 1px solid var(--line-light) }
+.cj-row { display: flex; align-items: baseline; justify-content: center; gap: 12px 32px }
+.cj { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.05; color: var(--ink); white-space: nowrap }
+.cj-70 { font-style: italic; font-weight: 800; font-size: 1.45em; line-height: 1; color: var(--red-btn); letter-spacing: -.035em; margin-right: .16em }
+/* Degradado rojo leve, vertical (igual en cada letra, así se lee como uno solo) */
+.cj-70 .bc, .cj-70:not(:has(.bc)) { background-image: linear-gradient(180deg, #ff4d5e 0%, #e0172d 50%, #a90d1f 100%); -webkit-background-clip: text; background-clip: text; color: transparent }
+/* La cursiva sobresale de la caja de cada letra: se amplía la caja (sin mover el texto) para que el degradado no la recorte */
+.cj-70 .bc { padding: .12em .14em; margin: -.12em -.14em }
+.cj-70:not(:has(.bc)) { padding: .12em .14em; margin-left: -.14em }
+.cj-tr { font-weight: 800; letter-spacing: -.03em }
+.cj-sig { position: relative; padding-left: 33px; font-size: clamp(19px, 1.8vw, 26px); font-weight: 500; letter-spacing: -.01em; color: #3a454c; white-space: nowrap }
+/* Línea vertical entre la frase y la firma */
+.cj-sig::before { content: ""; position: absolute; left: 0; top: 50%; width: 1px; height: 1.6em; transform: translateY(-50%); background: var(--line-light) }
+@media (max-width: 1100px) {
+  .cj-row { flex-direction: column; align-items: center; text-align: center; gap: 10px }
+  .cj-sig { padding-left: 0 }
+  .cj-sig::before { display: none }
+}
+@media (max-width: 560px) {
+  .cj { white-space: normal; text-wrap: balance }
+  .cj-sig { font-size: 18px }
+}
+.bw { display: inline-block; white-space: nowrap }
+.bc { display: inline-block; animation: blur-in .5s cubic-bezier(.2, .7, .2, 1) var(--d, 0ms) both }
+.blur-done .bc { animation: none !important; opacity: 1; filter: none; transform: none }
+@keyframes blur-in { from { opacity: 0; filter: blur(10px); transform: translateY(.22em) } to { opacity: 1; filter: none; transform: none } }
+
+/* ==========================================================================
+   Tipografía de toda la página (la misma del hero) y barra de navegación
+   ========================================================================== */
+body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif }
+.brand { flex-direction: row; align-items: center }
+.brand img { height: 40px }
+.nav > .btn { flex: none }
+@media (max-width: 1240px) {
+  .email { display: none }
+}
+@media (max-width: 560px) {
+  .brand img { height: 34px }
+}
+/* Pantallas entre 901 y 1023 px: la barra completa no cabe con esta tipografía; se compacta solo aquí */
+@media (min-width: 901px) and (max-width: 1023px) {
+  .nav nav { gap: 14px }
+  .nav nav a { font-size: 12px; letter-spacing: .03em }
+  .nav > .btn > .i:first-child { display: none }
+  .nav > .btn-slide { padding-left: 18px; padding-right: 18px }
+  .nav > .btn-slide:hover, .nav > .btn-slide:focus-visible { padding-left: 5px; padding-right: 5px }
+}
