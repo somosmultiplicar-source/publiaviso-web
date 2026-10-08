@@ -549,10 +549,8 @@ small, .brand em, .flogo em, .contact .note, .cp {
 }
 .hero .eyebrow { margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--red-on-dark) }
 .hero h1 { font-size: clamp(27px, 2.95vw, 42.5px); line-height: 1.16; font-weight: 800; letter-spacing: -.015em; max-width: 720px }
-.hero .lead { margin-top: 22px; max-width: 720px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.55; color: #e4e8ea; text-wrap: balance }
-.hero-tags { display: flex; flex-wrap: wrap; gap: 4px 0; margin-top: 26px; font-size: 13px; font-weight: 500; letter-spacing: .02em; color: rgba(255, 255, 255, .62) }
-.hero-tags span + span::before { content: "·"; margin: 0 10px; color: rgba(255, 255, 255, .4) }
-.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; margin-top: 36px }
+.hero .lead { margin-top: 28px; max-width: 720px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.65; color: #dce2e5; text-wrap: balance }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch; margin-top: 44px }
 .hero .btn-ghost { background: transparent; border: 1px solid rgba(255, 255, 255, .32); font-weight: 600; letter-spacing: .02em; color: rgba(255, 255, 255, .9) }
 
 /* Botones del hero: "Icon Slide" — el relleno blanco nace a la derecha, el texto cambia de color y entra una flecha */
@@ -572,10 +570,9 @@ small, .brand em, .flogo em, .contact .note, .cp {
 }
 @media (max-width: 560px) {
   .hero h1 { font-size: 27px }
-  .hero .eyebrow { font-size: 11px; letter-spacing: .12em }
-  .hero-tags { flex-direction: column; gap: 4px }
-  .hero-tags span + span::before { display: none }
-  .hero .actions { flex-direction: column; align-items: stretch; gap: 12px }
+  .hero .eyebrow { font-size: 11px; letter-spacing: .12em; margin-bottom: 14px }
+  .hero .lead { margin-top: 18px }
+  .hero .actions { flex-direction: column; align-items: stretch; gap: 12px; margin-top: 32px }
   .hero .actions .btn { width: 100% }
 }
 
