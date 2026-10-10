@@ -163,8 +163,6 @@ header.open .menu span:nth-child(3) { transform: translateY(-7px) rotate(-45deg)
 .dark p { font-size: 15px; line-height: 1.6; color: var(--muted-dark) }
 
 .hist { position: relative; overflow: hidden }
-.hist .bg { object-position: 50% 40% }
-.hist .shade { background: linear-gradient(90deg, rgba(7, 16, 23, .9) 0%, rgba(7, 16, 23, .55) 55%, rgba(7, 16, 23, .35) 100%), linear-gradient(0deg, rgba(7, 16, 23, .75), transparent 45%) }
 .hist .wrap { position: relative }
 .grid { display: grid; grid-template-columns: 1fr; gap: clamp(40px, 5vw, 64px) }
 .grid > div:first-child { max-width: 760px }
@@ -178,38 +176,6 @@ header.open .menu span:nth-child(3) { transform: translateY(-7px) rotate(-45deg)
   font-size: var(--type-small); font-weight: 700; letter-spacing: .04em; text-decoration: underline; text-underline-offset: 4px;
 }
 .hist a:hover { color: #fff }
-/* Cronología: foto de época + hito sobre una línea continua */
-.timeline { --g: clamp(16px, 2.4vw, 32px); list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 48px }
-.timeline > li { position: relative; padding-right: var(--g) }
-.tl-img {
-  margin: 0 0 30px; aspect-ratio: 4 / 5; overflow: hidden;
-  background: var(--navy-2); border: 1px solid rgba(255, 255, 255, .14);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
-}
-.tl-img img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: grayscale(1) contrast(1.05); transition: transform .6s ease }
-.timeline > li:hover .tl-img img { transform: scale(1.04) }
-.tl-img.color img { filter: none }
-.tl-img.ph {
-  position: relative; box-shadow: none; border-style: dashed;
-  background: repeating-linear-gradient(45deg, #0d1a22 0 12px, #12212b 12px 24px);
-}
-.tl-img.ph::after {
-  content: "FOTO PENDIENTE"; position: absolute; inset: 0; display: grid; place-items: center;
-  font-size: var(--type-small); font-weight: 700; letter-spacing: .14em; color: #6f7f89;
-}
-.timeline b {
-  display: block; position: relative; margin-right: calc(-1 * var(--g));
-  padding-top: 24px; border-top: 1px solid #657078;
-  color: var(--red-on-dark); font-size: clamp(22px, 2.2vw, 28px); font-weight: 800; line-height: 1; letter-spacing: .01em;
-}
-.timeline > li:last-child b { margin-right: 0 }
-.timeline b::before {
-  content: ""; position: absolute; top: -7px; left: 0; width: 13px; height: 13px; border-radius: 50%;
-  background: var(--red); box-shadow: 0 0 0 4px var(--navy);
-}
-.timeline strong { display: block; font-size: 14px; margin: 12px 0 6px; letter-spacing: .03em; color: #fff }
-.timeline span { font-size: 14px; line-height: 1.55; color: var(--muted-dark); display: block }
-
 /* ---------- Capacidades ---------- */
 .caps { padding: var(--section-y) 0 }
 .caps h2 { border-left: 4px solid var(--red); padding-left: 14px }
@@ -387,17 +353,6 @@ footer { background: var(--grey); padding: 32px 0; font-size: var(--type-small) 
 }
 
 @media (max-width: 700px) {
-  .timeline { grid-template-columns: 1fr; row-gap: 0; padding-left: 8px }
-  .timeline > li {
-    display: grid; grid-template-columns: 104px 1fr; grid-template-rows: auto auto 1fr; column-gap: 18px; align-content: start;
-    padding: 0 0 32px 24px; border-left: 1px solid #657078;
-  }
-  .timeline > li:last-child { padding-bottom: 0; border-left-color: transparent }
-  .tl-img { grid-row: 1 / span 3; margin: 0; box-shadow: none }
-  .tl-img.ph::after { font-size: var(--type-small); letter-spacing: .1em }
-  .timeline b { position: static; margin: 0; padding: 0; border: 0; font-size: 22px }
-  .timeline b::before { top: 2px; left: -7px }
-  .timeline strong { margin-top: 8px }
   .cog { grid-template-columns: 1fr; gap: 32px }
   .fg { flex-direction: column; align-items: flex-start }
   .cp { max-width: none }
@@ -453,7 +408,7 @@ footer { background: var(--grey); padding: 32px 0; font-size: var(--type-small) 
 
 /* Escala tipográfica compartida: cuerpo, etiquetas y texto auxiliar. */
 .actions p, .features p, .dark p, .sub, .cards p, .sect p,
-.coverage p, .reg p, .timeline span, .project ul,
+.coverage p, .reg p, .project ul,
 .contact input, .contact select, .contact textarea {
   font-size: var(--type-body); font-weight: 400; line-height: 1.6;
 }
@@ -466,7 +421,6 @@ small, .brand em, .flogo em, .contact .note, .cp {
 }
 .dark small, .project small { font-size: var(--type-label); font-weight: 700 }
 .actions p { max-width: 440px }
-.tl-img.ph::after { padding: 8px; text-align: center; letter-spacing: .08em }
 .cards article, .duog > div, .cg > div, .cog > div { min-width: 0 }
 
 
@@ -737,3 +691,108 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
 .cd p { margin-bottom: 6px }
 /* Icono oficial de WhatsApp, en su verde */
 .wa .wa-ico { flex: none; width: 22px; height: 22px; margin-right: 10px; fill: #25d366 }
+
+/* ==========================================================================
+   Nuestra Historia: línea de tiempo
+   Sin JS, con movimiento reducido o en móvil: lista vertical con línea lateral.
+   Con JS en pantallas amplias (.ht.is-h): recorrido horizontal fijado al scroll (historia.js).
+   ========================================================================== */
+.hist { padding: calc(var(--section-y) * .8) 0 }
+.hist h2 { font-size: clamp(29px, 3.7vw, 51px); line-height: 1.04; font-weight: 800; letter-spacing: -.025em }
+.hist .hist-head p { max-width: 560px; font-size: 16px; line-height: 1.55 }
+.hist .hist-head p + p { margin-top: 12px }
+.hist .hist-head h2 { margin-bottom: 0 }
+.hist .hist-head { gap: 20px }
+@media (min-width: 901px) {
+  /* 44% título · 8% aire · 48% texto, alineados por arriba */
+  .hist .hist-head { grid-template-columns: 44% 48%; justify-content: space-between; align-items: start; gap: 0 }
+  .hist .hist-head > div:first-child { max-width: none }
+}
+
+.ht { --dot: 9px; margin-top: clamp(38px, 4.8vw, 64px) }
+.ht-track { position: relative; width: min(608px, calc(100% - 48px)); margin: auto; padding-left: 36px }
+.ht-line { position: absolute; left: 5px; top: 8px; bottom: 0; width: 1px; background: rgba(255, 255, 255, .2) }
+.ht-progress { position: absolute; inset: 0; display: none; background: var(--red); transform-origin: 0 0 }
+.ht-list { list-style: none; margin: 0; padding: 0 }
+.ht-list > li { position: relative; padding-bottom: 45px }
+.ht-list > li:last-child { padding-bottom: 0 }
+.ht-list > li::before {
+  content: ""; position: absolute; z-index: 1; top: 3px; left: calc(-36px + 5.5px - var(--dot) / 2); width: var(--dot); height: var(--dot); border-radius: 50%;
+  background: var(--red); box-shadow: 0 0 0 5px var(--navy); transition: background .4s ease, box-shadow .4s ease;
+}
+.ht-fig { --ar: 3 / 2; margin: 0 0 18px; aspect-ratio: var(--ar); overflow: hidden; border-radius: 4px; background: var(--navy-2) }
+.ht-fig[style*="4 / 5"] { max-width: 256px }
+.ht-fig img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.04) }
+.ht-fig.color img { filter: none }
+.ht-year {
+  display: block; white-space: nowrap; color: #fff; font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -.025em;
+  font-variant-numeric: tabular-nums; transition: color .4s ease;
+}
+.ht-meta strong { display: block; margin-top: 10px; font-size: 14px; font-weight: 700; letter-spacing: .01em; color: #fff }
+.dark .ht-meta p { max-width: 240px; margin-top: 5px; font-size: 14px; line-height: 1.55 }
+
+/* Estados del recorrido (solo con JS): base tenue, hitos alcanzados y el hito actual */
+.ht.is-live .ht-progress { display: block; transform: scaleY(0) }
+.ht.is-live .ht-list > li::before { background: var(--navy); box-shadow: 0 0 0 5px var(--navy), inset 0 0 0 2px rgba(255, 255, 255, .45) }
+.ht.is-live .ht-list > li.is-past::before { background: var(--red); box-shadow: 0 0 0 5px var(--navy) }
+.ht.is-live .ht-list > li.is-current::before { box-shadow: 0 0 0 5px var(--navy), 0 0 0 10px rgba(239, 24, 43, .28) }
+.ht.is-live .ht-year { color: rgba(255, 255, 255, .45) }
+.ht.is-live .is-past .ht-year { color: #fff }
+.ht.is-live .is-current .ht-year { color: var(--red-on-dark) }
+
+/* ---------- Recorrido horizontal ----------
+   La altura sale del contenido (no de 100vh): el bloque encabezado + línea se fija centrado bajo el header.
+   Todas las fotos comparten altura y van sobre la línea; las pares suben levemente (--lift). */
+.ht.is-h { --fh: clamp(170px, calc(100vh - var(--header-h) - 340px), 420px); --lift: 16px; --gap: 24px; margin-top: 52px; padding-top: 30px; overflow: hidden }
+.ht.is-h .ht-track {
+  display: flex; width: max-content; margin: 0; will-change: transform;
+  padding: 0 24vw 0 max(24px, calc((100vw - 1240px) / 2));
+}
+.ht.is-h .ht-line {
+  left: 0; right: 0; top: calc(var(--lift) + var(--fh) + var(--gap)); bottom: auto; width: auto; height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .22) 85%, rgba(255, 255, 255, 0));
+}
+.ht.is-h .ht-progress { transform: scaleX(0) }
+.ht.is-h .ht-list { display: flex; align-items: flex-start }
+.ht.is-h .ht-list > li { padding: var(--lift) 0 0; margin-right: clamp(48px, 5vw, 88px) }
+.ht.is-h .ht-list > li:nth-child(even) { padding-top: 0 }
+.ht.is-h .ht-list > li:last-child { margin-right: 0 }
+.ht.is-h .ht-list > li::before { top: calc(var(--lift) + var(--fh) + var(--gap)); left: calc(var(--dot) / -2); margin-top: calc(var(--dot) / -2) }
+.ht.is-h .ht-fig { height: var(--fh); width: auto; max-width: none; margin: 0 0 var(--gap) }
+.ht.is-h .ht-list > li:nth-child(even) .ht-fig { margin-bottom: calc(var(--gap) + var(--lift)) }
+.ht.is-h .ht-meta { padding-top: 20px; max-width: 320px }
+.ht.is-h .ht-meta strong, .dark .ht.is-h .ht-meta p { max-width: 320px }
+.ht.is-h .ht-year { font-size: clamp(35px, 3.5vw, 56px) }
+@media (max-width: 900px) {
+  .ht.is-h { --fh: clamp(170px, calc(100vh - var(--header-h) - 360px), 320px); margin-top: 48px }
+}
+
+/* ---------- Capítulos, homenaje, grupo de evolución y cierre 2026 ---------- */
+.ht-ch { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; white-space: nowrap; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-dark) }
+.ht-ch::before { content: ""; width: 18px; height: 2px; background: var(--red) }
+.ht.is-h .ht-ch { position: absolute; top: -30px; left: 0; margin: 0 }
+.ht.is-h .ht-list > li:nth-child(even) .ht-ch { top: -30px }
+
+/* Cuatro fotografías de evolución empresarial agrupadas en un solo bloque, en el orden de la referencia */
+.ht-set { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; background: none; border-radius: 0; overflow: visible }
+.ht-set img { min-height: 0; border-radius: 3px }
+
+/* Homenaje: nombre como protagonista y fechas como dato secundario (no es un año del recorrido) */
+.ht-kicker { display: block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-on-dark) }
+.ht-name { display: block; margin-top: 8px; font-size: clamp(22px, 2vw, 30px); font-weight: 800; line-height: 1.1; letter-spacing: -.015em; color: #fff }
+.ht-dates { display: block; margin-top: 6px; font-size: 14px; font-weight: 600; letter-spacing: .06em; font-variant-numeric: tabular-nums; color: var(--muted-dark) }
+.ht-tribute .ht-fig { outline: 1px solid rgba(255, 255, 255, .22); outline-offset: 6px }
+.ht-list > li.ht-tribute::before, .ht.is-live .ht-list > li.ht-tribute::before { background: var(--navy); box-shadow: 0 0 0 5px var(--navy), inset 0 0 0 2px var(--red) }
+
+/* Cierre 2026 levemente destacado */
+.ht-final .ht-fig { outline: 1px solid rgba(239, 24, 43, .55); outline-offset: 6px }
+.ht-final .ht-year, .ht.is-live .ht-final.is-past .ht-year { color: var(--red-on-dark) }
+.ht.is-live .ht-final .ht-year { color: rgba(255, 90, 104, .5) }
+.ht-list > li.ht-final { --dot: 13px }
+.ht.is-h .ht-final .ht-year { font-size: clamp(44px, 4.4vw, 72px) }
+
+@media (max-width: 560px) {
+  .ht-track { width: calc(100% - 32px); padding-left: 30px }
+  .ht-list > li::before { left: calc(-30px + 5.5px - var(--dot) / 2) }
+  .ht-year { font-size: 27px }
+}
