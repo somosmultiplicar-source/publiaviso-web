@@ -7,7 +7,7 @@
 <meta property="og:title" content="PUBLIAVISO C.A. | Ingeniería en comunicación visual"><meta property="og:description" content="70 años de experiencia en comunicación visual, señalización normativa y vialidad segura para la industria venezolana.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap">
-<link rel="stylesheet" href="styles.css?v=30"></head><body><a class="skip" href="#main">Saltar al contenido</a><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<link rel="stylesheet" href="styles.css?v=31"></head><body><a class="skip" href="#main">Saltar al contenido</a><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="layers" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5zM3 13l9 5 9-5M3 17l9 5 9-5"></path></symbol>
 <symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.500-1-8-4-8-9V6z"></path><path d="m8.500 12 2.500 2.500 4.500-5"></path></symbol>
 <symbol id="road" viewBox="0 0 24 24"><path d="M8 3 4 21M16 3l4 18M12 4v3M12 11v3M12 18v3"></path></symbol>
@@ -88,12 +88,20 @@ if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   words.forEach(function(w,wi){
     var ws=document.createElement("span");ws.className="bw";
     if(byWord){ws.classList.add("bc");ws.style.setProperty("--d",(start+n++*80)+"ms");ws.textContent=w}
+    else if(/^[0-9]+$/.test(w)&&el.classList.contains("cj-70")){var cs=document.createElement("span");cs.className="bc cj-count";cs.dataset.to=w;cs.textContent=w;cs.style.setProperty("--d",(start+n)+"ms");n+=w.length;ws.appendChild(cs)}
     else w.split("").forEach(function(ch){var cs=document.createElement("span");cs.className="bc";cs.textContent=ch;cs.style.setProperty("--d",(start+n++*30)+"ms");ws.appendChild(cs)});
     el.appendChild(ws);if(wi<words.length-1)el.appendChild(document.createTextNode(" "));
   });
 });
+/* Contador del cintillo: 0 → 70 al cargar (el ancho fijo va en CSS, así «años» no se mueve) */
+[].forEach.call(document.querySelectorAll(".cj-count"),function(c){
+  var to=+c.dataset.to,dur=1600,t0=null;
+  c.textContent="0";
+  function step(t){if(t0===null)t0=t;var p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);c.textContent=Math.round(to*e);if(p<1)requestAnimationFrame(step)}
+  requestAnimationFrame(step);
+});
 /* Salvaguarda: si la animación no llega a completarse (pestaña en segundo plano, ahorro de energía…), el texto se muestra igual */
-setTimeout(function(){[].forEach.call(document.querySelectorAll("[data-blur]"),function(el){el.classList.add("blur-done")})},2600);
+setTimeout(function(){[].forEach.call(document.querySelectorAll("[data-blur]"),function(el){el.classList.add("blur-done")});[].forEach.call(document.querySelectorAll(".cj-count"),function(c){c.textContent=c.dataset.to})},2600);
 })();
 </script>
 <script>

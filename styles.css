@@ -499,6 +499,8 @@ small, .brand em, .flogo em, .contact .note, .cp {
   .cj-sig { font-size: 18px }
 }
 .bw { display: inline-block; white-space: nowrap }
+/* Contador 0 → 70: ancho de dos cifras (2ch) + el relleno de .cj-70 .bc, cifras tabulares alineadas a la derecha */
+.cj-count { width: calc(2ch + .28em); text-align: right; font-variant-numeric: tabular-nums }
 .bc { display: inline-block; animation: blur-in .5s cubic-bezier(.2, .7, .2, 1) var(--d, 0ms) both }
 .blur-done .bc { animation: none !important; opacity: 1; filter: none; transform: none }
 @keyframes blur-in { from { opacity: 0; filter: blur(10px); transform: translateY(.22em) } to { opacity: 1; filter: none; transform: none } }
