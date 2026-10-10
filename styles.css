@@ -180,28 +180,6 @@ header.open .menu span:nth-child(3) { transform: translateY(-7px) rotate(-45deg)
 .caps { padding: var(--section-y) 0 }
 .caps h2 { border-left: 4px solid var(--red); padding-left: 14px }
 .sub { font-size: 16px; color: var(--muted); margin: 12px 0 32px }
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px }
-.cards article {
-  position: relative; overflow: hidden; isolation: isolate;
-  min-height: 260px; color: #fff; padding: 16px;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  background: var(--navy);
-  transition: transform var(--ease), box-shadow var(--ease);
-}
-.cards article::before {
-  content: ""; position: absolute; inset: 0 0 38% 0; z-index: -2;
-  background: var(--img) center / cover no-repeat;
-  transition: transform .4s ease;
-}
-.cards article::after {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(180deg, transparent 35%, var(--navy) 62%);
-}
-.cards article:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(7, 16, 23, .25) }
-.cards article:hover::before { transform: scale(1.06) }
-.cards b { font-size: 24px; color: var(--red-on-dark); line-height: 1 }
-.cards h3 { font-size: var(--type-h3); font-weight: 600; margin: 8px 0 4px; line-height: 1.25; overflow-wrap: anywhere }
-.cards p { font-size: var(--type-small); line-height: 1.4; color: var(--muted-dark) }
 
 /* ---------- Sectores + nuevo ciclo ---------- */
 .duo { padding: 0 }
@@ -313,7 +291,6 @@ footer { background: var(--grey); padding: 32px 0; font-size: var(--type-small) 
   .nav { gap: 18px }
   .nav nav { gap: 20px }
   .email { display: none }
-  .cards { grid-template-columns: repeat(3, 1fr) }
   .cog { grid-template-columns: 1fr 1fr }
   .contact form { grid-column: 1 / -1 }
   .features article { padding: 24px 20px }
@@ -373,9 +350,6 @@ footer { background: var(--grey); padding: 32px 0; font-size: var(--type-small) 
   .actions { flex-direction: column; align-items: flex-start; gap: 16px }
   .actions .btn { width: 100% }
 
-  .cards { grid-template-columns: 1fr; gap: 16px }
-  .cards article { min-height: 230px; padding: 12px }
-  .cards h3 { font-size: var(--type-h3); font-weight: 600; margin: 8px 0 4px; line-height: 1.25; overflow-wrap: anywhere }
   .sect { grid-template-columns: 1fr; gap: 24px }
   .sect > div { border-right: 0; border-bottom: 1px solid var(--line-dark); padding: 0 0 20px }
   .sect > div:last-child { border: 0; padding-bottom: 0 }
@@ -424,25 +398,6 @@ small, .brand em, .flogo em, .contact .note, .cp {
 .cards article, .duog > div, .cg > div, .cog > div { min-width: 0 }
 
 
-/* Catálogo: selección estable y una superficie compartida de lectura. */
-.cards { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 12px; align-items: stretch }
-.cap-tile { appearance: none; position: relative; display: flex; flex-direction: column; text-align: left; padding: 0 0 18px; overflow: hidden; font: inherit; color: var(--ink); background: #f2f4f5; border: 1px solid var(--line-light); border-radius: 4px; cursor: pointer; transition: border-color .2s,background .2s; min-width: 0 }
-.cap-tile img { display: block; width: 100%; height: 104px; object-fit: cover; margin-bottom: 14px }
-.cap-number { margin: 0 14px 6px; color: var(--red-text); font-size: 14px; font-weight: 700 }
-.cap-name { margin: 0 14px; font-size: 20px; font-weight: 600; line-height: 1.25 }
-.cap-tile:hover { border-color: var(--red-text) }
-.cap-tile[aria-selected="true"] { border-color: var(--red-text); background: #fff; box-shadow: inset 0 -4px var(--red-text) }
-.cap-tile:focus-visible { outline: 3px solid var(--red-text); outline-offset: 3px }
-.cap-stage { margin-top: 24px; padding: 32px; border: 1px solid var(--line-light); border-top: 3px solid var(--red-text); background: #f7f8f9; border-radius: 4px }
-.cap-tabpanel[hidden] { display: none }
-.cap-panel-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding-bottom: 22px; margin-bottom: 24px; border-bottom: 1px solid var(--line-light) }
-.cap-kicker { color: var(--muted); font-size: var(--type-label); letter-spacing: .08em; font-weight: 600 }
-.cap-products { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 40px; min-height: 245px }
-.cap-product h4 { font-size: var(--type-h3); line-height: 1.3; font-weight: 600; margin: 12px 0 }
-.cap-product p, .cap-product ul { font-size: var(--type-body); line-height: 1.6; color: var(--muted) }
-.cap-product .cap-norm { color: var(--red-text); font-size: var(--type-label); letter-spacing: .08em; font-weight: 600 }
-.cap-product ul { padding-left: 20px; margin: 16px 0 0 }
-.cap-product li + li { margin-top: 6px }
 .coverage { background: #f3f4f5; color: var(--ink); border-top: 1px solid var(--line-light) }
 .coverage .cg { grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); align-items: start; gap: 56px }
 .coverage .cmap p { color: #3a454c }
@@ -466,8 +421,6 @@ small, .brand em, .flogo em, .contact .note, .cp {
 .contact .requirement-field textarea { display: block; min-height: 200px; grid-column: auto; grid-row: auto; line-height: 1.6 }
 .brand img,.flogo img { object-fit: contain }
 @media(max-width:1100px) {
-  .cards { grid-template-columns: repeat(3,minmax(0,1fr)) }
-  .cap-tile img { height: 110px }
   .cog { gap: 32px }
 }
 @media(max-width:900px) {
@@ -476,15 +429,6 @@ small, .brand em, .flogo em, .contact .note, .cp {
   .contact-intro,.cd,.contact form { grid-column: 1; grid-row: auto }
 }
 @media(max-width:560px) {
-  .cards { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px }
-  .cap-tile img { height: 76px; margin-bottom: 10px }
-  .cap-name { font-size: 19px; margin: 0 12px }
-  .cap-number { margin: 0 12px 4px }
-  .cap-tile { padding-bottom: 14px }
-  .cap-stage { padding: 22px 18px; margin-top: 18px }
-  .cap-panel-heading { flex-direction: column; gap: 8px }
-  .cap-products { grid-template-columns: 1fr; min-height: 0; gap: 28px }
-  .cap-product + .cap-product { border-top: 1px solid var(--line-light); padding-top: 24px }
   .contact form { padding: 20px 16px }
   .project { padding: 24px }
 }
@@ -796,3 +740,89 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
   .ht-list > li::before { left: calc(-30px + 5.5px - var(--dot) / 2) }
   .ht-year { font-size: 27px }
 }
+
+
+/* ==========================================================================
+   Nuestras capacidades — Image-to-Content Reveal
+   Reposo: fotografía, número (placa roja arriba) y nombre (abajo).
+   Activa: crossfade foto → fondo navy sólido; especificaciones con fade-in-up.
+   ≥760px: la ficha aparece dentro de la tarjeta (sin cambiar su tamaño).
+   <760px: portada compacta y ficha que se despliega en el flujo.
+   Sin JS todas las fichas quedan visibles.
+   ========================================================================== */
+.cap-cards { --cap-ease: cubic-bezier(.22, 1, .36, 1); display: grid; grid-template-columns: 1fr; gap: 16px }
+.cap-card { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; overflow: hidden; border-radius: 6px; background: var(--navy); color: #fff }
+.cap-cover { position: relative; overflow: hidden; z-index: -1 }
+.cap-cover img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s var(--cap-ease) }
+/* Degradado inferior para leer el nombre sobre la foto */
+.cap-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(7, 16, 23, .9) 0%, rgba(7, 16, 23, .45) 34%, rgba(7, 16, 23, 0) 62%); opacity: 0; transition: opacity .3s var(--cap-ease) }
+.cap-head { margin: 0; z-index: 1 }
+.cap-toggle {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 44px; padding: 0 20px 20px; margin: 0;
+  text-align: left; font: inherit; color: #fff; background: none; border: 0; cursor: pointer;
+}
+.cap-toggle:focus-visible { outline: 2px solid var(--red-on-dark); outline-offset: -4px; border-radius: 6px }
+/* Número: placa roja fija arriba a la izquierda en ambos estados */
+.cap-number {
+  position: absolute; top: 20px; left: 20px; padding: 6px 8px; border-radius: 2px; background: var(--red-btn);
+  font-size: 12px; font-weight: 700; line-height: 1; letter-spacing: .04em; color: #fff; font-variant-numeric: tabular-nums;
+}
+.cap-name { flex: 1; font-size: 20px; font-weight: 700; line-height: 1.25; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(7, 16, 23, .4) }
+/* Ficha fijada: trazo rojo corto bajo el nombre (sin icono «+»; el estado se comunica con aria-expanded) */
+.cap-name { position: relative }
+.cap-name::after { content: ""; position: absolute; left: 0; top: -10px; width: 0; height: 3px; background: var(--red); transition: width .25s var(--cap-ease) } /* fuera del flujo: no cambia medidas */
+.cap-card.is-pinned .cap-name::after { width: 28px }
+
+/* Ficha: producto > descripción y especificaciones > referencia normativa */
+.cap-sheet { min-width: 0; z-index: 1 }
+.cap-sheet-in { min-height: 0; padding: 0 20px 18px }
+.cap-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px 28px }
+.cap-product { min-width: 0; transition: opacity .24s var(--cap-ease) calc(.06s + var(--k, 0) * .03s), transform .24s var(--cap-ease) calc(.06s + var(--k, 0) * .03s) }
+.cap-product h4 { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.35; color: #fff }
+.cap-card .cap-product p { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--muted-dark) }
+.cap-product ul { margin: 8px 0 0; padding: 0; list-style: none }
+.cap-product li { position: relative; padding-left: 14px; font-size: 14px; line-height: 1.45; color: #fff }
+.cap-product li + li { margin-top: 2px }
+.cap-product li::before { content: ""; position: absolute; left: 0; top: .7em; width: 7px; height: 2px; background: var(--red) }
+.cap-card .cap-product .cap-norm { margin-top: 8px; font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: .06em; color: rgba(255, 255, 255, .68) }
+
+/* Estado de reposo (solo con JS): la foto visible, la ficha oculta. La salida es algo más rápida y sin desfases */
+.cap-cards.is-js .cap-card:not(.is-open) .cap-cover img { opacity: 1; transition: opacity .24s ease }
+.cap-cards.is-js .cap-card:not(.is-open) .cap-cover::after { opacity: 1; transition: opacity .24s ease }
+.cap-cards.is-js .cap-card:not(.is-open) .cap-product { opacity: 0; transform: translateY(8px); transition: opacity .16s ease, transform .18s ease }
+.cap-cards.is-js .cap-card:not(.is-open) .cap-sheet { visibility: hidden; transition: visibility 0s linear .2s }
+
+/* ---------- ≥760px: ficha dentro de la tarjeta, tamaño constante ----------
+   Filas: [placa del número] [ficha] [nombre]. El alto de cada fila de tarjetas sale de su ficha más
+   extensa (mínimo la proporción de la referencia, 9:7), así nada se corta y el hover no cambia medidas. */
+@media (min-width: 760px) {
+  .cap-cards { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .cap-card { grid-template-rows: 64px 1fr auto }
+  .cap-card::before { content: ""; grid-area: 1 / 1 / 4 / 2; aspect-ratio: 9 / 7; pointer-events: none }
+  .cap-cover { position: absolute; inset: 0 }
+  .cap-sheet { grid-area: 2 / 1 }
+  .cap-head { grid-area: 3 / 1 }
+  .cap-products { grid-template-columns: 1fr }
+  .cap-product + .cap-product { border-top: 1px solid var(--line-dark); padding-top: 14px }
+}
+@media (min-width: 1200px) {
+  .cap-cards { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+}
+/* ---------- <760px: portada compacta + ficha en el flujo ---------- */
+@media (max-width: 759px) {
+  .cap-card { grid-template-rows: auto auto }
+  .cap-cover { grid-area: 1 / 1; width: 100%; height: min(260px, calc((100vw - 32px) * 9 / 16)) }
+  .cap-cards.is-js .cap-card .cap-cover img { opacity: 1 } /* en móvil la foto permanece como portada */
+  .cap-cover::after { opacity: 1 }
+  .cap-head { grid-area: 1 / 1; align-self: end }
+  .cap-sheet { grid-area: 2 / 1; display: grid; grid-template-rows: 1fr; transition: grid-template-rows .3s var(--cap-ease) }
+  .cap-sheet-in { overflow: hidden; padding: 18px 18px 22px; transition: padding .3s var(--cap-ease) }
+  .cap-cards.is-js .cap-card:not(.is-open) .cap-sheet { grid-template-rows: 0fr; transition: grid-template-rows .24s ease, visibility 0s linear .24s }
+  .cap-cards.is-js .cap-card:not(.is-open) .cap-sheet-in { padding-top: 0; padding-bottom: 0; transition: padding .24s ease }
+  .cap-product + .cap-product { border-top: 1px solid var(--line-dark); padding-top: 16px }
+  .cap-number { top: 16px; left: 16px }
+  .cap-toggle { padding: 0 16px 16px }
+}
+/* Aparición al entrar en pantalla: sistema común del sitio, con recorrido corto */
+.reveal-on .cap-cards > .cap-card.rv { translate: 0 12px }
+.reveal-on .cap-cards > .cap-card.rv.in { translate: 0 0 }
