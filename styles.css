@@ -630,7 +630,7 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
 .pilar-desc { display: grid; grid-template-rows: 1fr }
 .pilar-desc > div { overflow: hidden; min-height: 0 }
 @media (hover: hover) and (min-width: 901px) {
-  /* En reposo la descripción no ocupa espacio: los tres títulos quedan alineados abajo */
+  /* En reposo la descripción no ocupa espacio */
   .pilar-desc { grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.22, .61, .36, 1) }
   .features article:hover .pilar-desc, .features article:focus-visible .pilar-desc { grid-template-rows: 1fr }
   .features .pilar-body p { opacity: 0; transform: translateY(12px); transition: opacity .3s ease, transform .4s cubic-bezier(.22, .61, .36, 1) }
@@ -638,6 +638,10 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
   .features article:hover::after, .features article:focus-visible::after { opacity: 1 }
   .features article:hover .pilar-body::before, .features article:focus-visible .pilar-body::before { width: 56px }
   .features article:hover .pilar-body p, .features article:focus-visible .pilar-body p { opacity: 1; transform: none; transition: opacity .35s ease .08s, transform .4s cubic-bezier(.22, .61, .36, 1) .08s }
+}
+/* Con 3 columnas: el título reserva dos líneas para que la raya roja y el inicio del título queden a la misma altura en las tres */
+@media (min-width: 901px) {
+  .features .pilar-body b { min-height: 2.6em }
 }
 /* Tablet: 3 columnas más compactas */
 @media (max-width: 1100px) {
@@ -652,12 +656,8 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
   .features .pilar-body b { font-size: 17px }
   .features .pilar-body p { font-size: 15px }
 }
-/* Móvil: cards apiladas, 4:5, título y descripción siempre visibles */
+/* Móvil: mismo apilado que en tablet; solo se refuerza el degradado bajo el texto */
 @media (max-width: 700px) {
-  .features { grid-template-columns: 1fr; gap: 12px }
-  .pilar-body { padding: 24px 22px 26px }
-  .features .pilar-body b { font-size: 17px }
-  .features .pilar-body p { font-size: 15px }
   .features article::before { background: linear-gradient(to top, rgba(7, 16, 23, .92) 0%, rgba(7, 16, 23, .7) 32%, rgba(7, 16, 23, 0) 65%) }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -698,7 +698,7 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
    Con JS en pantallas amplias (.ht.is-h): recorrido horizontal fijado al scroll (historia.js).
    ========================================================================== */
 .hist { padding: calc(var(--section-y) * .8) 0 }
-.hist h2 { font-size: clamp(29px, 3.7vw, 51px); line-height: 1.04; font-weight: 800; letter-spacing: -.025em }
+.hist h2 { font-size: clamp(29px, 3.7vw, var(--type-h2)); line-height: 1.04; font-weight: 800; letter-spacing: -.025em }
 .hist .hist-head p { max-width: 560px; font-size: 16px; line-height: 1.55 }
 .hist .hist-head p + p { margin-top: 12px }
 .hist .hist-head h2 { margin-bottom: 0 }
@@ -720,7 +720,7 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
   content: ""; position: absolute; z-index: 1; top: 3px; left: calc(-36px + 5.5px - var(--dot) / 2); width: var(--dot); height: var(--dot); border-radius: 50%;
   background: var(--red); box-shadow: 0 0 0 5px var(--navy); transition: background .4s ease, box-shadow .4s ease;
 }
-.ht-fig { --ar: 3 / 2; margin: 0 0 18px; aspect-ratio: var(--ar); overflow: hidden; border-radius: 4px; background: var(--navy-2) }
+.ht-fig { --ar: 3 / 2; margin: 0 0 18px; aspect-ratio: var(--ar); overflow: hidden; border-radius: 6px; background: var(--navy-2) }
 .ht-fig[style*="4 / 5"] { max-width: 256px }
 .ht-fig img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.04) }
 .ht-fig.color img { filter: none }
@@ -743,10 +743,11 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
 /* ---------- Recorrido horizontal ----------
    La altura sale del contenido (no de 100vh): el bloque encabezado + línea se fija centrado bajo el header.
    Todas las fotos comparten altura y van sobre la línea; las pares suben levemente (--lift). */
-.ht.is-h { --fh: clamp(170px, calc(100vh - var(--header-h) - 340px), 420px); --lift: 16px; --gap: 24px; margin-top: 52px; padding-top: 30px; overflow: hidden }
+.ht.is-h { --fh: clamp(170px, calc(100vh - var(--header-h) - 340px), 360px); --lift: 16px; --gap: 24px; margin-top: 52px; padding-top: 30px; overflow: hidden }
 .ht.is-h .ht-track {
   display: flex; width: max-content; margin: 0; will-change: transform;
-  padding: 0 24vw 0 max(24px, calc((100vw - 1240px) / 2));
+  /* Márgenes iguales a los de .wrap (% = ancho real sin barra de scroll) */
+  padding: 0 max(24px, calc((100% - 1240px) / 2));
 }
 .ht.is-h .ht-line {
   left: 0; right: 0; top: calc(var(--lift) + var(--fh) + var(--gap)); bottom: auto; width: auto; height: 1px;
@@ -754,7 +755,7 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
 }
 .ht.is-h .ht-progress { transform: scaleX(0) }
 .ht.is-h .ht-list { display: flex; align-items: flex-start }
-.ht.is-h .ht-list > li { padding: var(--lift) 0 0; margin-right: clamp(48px, 5vw, 88px) }
+.ht.is-h .ht-list > li { padding: var(--lift) 0 0; margin-right: 48px }
 .ht.is-h .ht-list > li:nth-child(even) { padding-top: 0 }
 .ht.is-h .ht-list > li:last-child { margin-right: 0 }
 .ht.is-h .ht-list > li::before { top: calc(var(--lift) + var(--fh) + var(--gap)); left: calc(var(--dot) / -2); margin-top: calc(var(--dot) / -2) }
@@ -771,11 +772,10 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
 .ht-ch { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; white-space: nowrap; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-dark) }
 .ht-ch::before { content: ""; width: 18px; height: 2px; background: var(--red) }
 .ht.is-h .ht-ch { position: absolute; top: -30px; left: 0; margin: 0 }
-.ht.is-h .ht-list > li:nth-child(even) .ht-ch { top: -30px }
 
 /* Cuatro fotografías de evolución empresarial agrupadas en un solo bloque, en el orden de la referencia */
 .ht-set { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; background: none; border-radius: 0; overflow: visible }
-.ht-set img { min-height: 0; border-radius: 3px }
+.ht-set img { min-height: 0; border-radius: 4px }
 
 /* Homenaje: nombre como protagonista y fechas como dato secundario (no es un año del recorrido) */
 .ht-kicker { display: block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-on-dark) }
