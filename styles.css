@@ -596,6 +596,9 @@ body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", R
 /* Con 3 columnas: el título reserva dos líneas para que la raya roja y el inicio del título queden a la misma altura en las tres */
 @media (min-width: 901px) {
   .features .pilar-body b { min-height: 2.6em }
+  /* Escritorio: cards cuadradas (un 20 % más bajas que 4:5) para que no dominen la página */
+  .features article { aspect-ratio: 1 / 1 }
+  .features article:first-child .pilar-img img { object-position: center 25% }
 }
 /* Tablet: 3 columnas más compactas */
 @media (max-width: 1100px) {
